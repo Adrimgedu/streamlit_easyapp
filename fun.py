@@ -63,6 +63,8 @@ def read_data(sheet_name):
 def write_data(new_data,sheet_name):
     """Append new data to Google Sheets"""
     sheet = get_google_sheet(sheet_name)
+    if not isinstance(new_data[0], list):
+        new_data = [new_data]
     for row in new_data:
         sheet.append_row(row)
 
