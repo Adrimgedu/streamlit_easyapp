@@ -15,15 +15,43 @@ from oauth2client.service_account import ServiceAccountCredentials
 import os 
 import pandas as pd
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
 def get_google_sheet(sheet_name):
-    """Authenticate and get the Google Sheet"""
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name(os.getenv('CREDENTIALS_FILE'), scope)
+    """Authenticate and get the Google Sheet."""
+
+    service_account_info = {
+        "type": os.getenv("GSA_TYPE"),
+        "project_id": os.getenv("GSA_PROJECT_ID"),
+        "private_key_id": os.getenv("GSA_PRIVATE_KEY_ID"),
+        "private_key": os.getenv("GSA_PRIVATE_KEY"),
+        "client_email": os.getenv("GSA_CLIENT_EMAIL"),
+        "client_id": os.getenv("GSA_CLIENT_ID"),
+        "auth_uri": os.getenv("GSA_AUTH_URI"),
+        "token_uri": os.getenv("GSA_TOKEN_URI"),
+        "auth_provider_x509_cert_url": os.getenv("GSA_AUTH_PROVIDER_X509_CERT_URL"),
+        "client_x509_cert_url": os.getenv("GSA_CLIENT_X509_CERT_URL"),
+        "universe_domain": os.getenv("GSA_UNIVERSE_DOMAIN"),
+    }
+
+    # Define the scopes
+    scopes = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+
+    # Create the credentials from the dictionary
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info, scopes)
+
+
+    # Authorize gspread
     client = gspread.authorize(creds)
+
+    # Use another environment variable for the spreadsheet name, or hard-code if preferred
     spreadsheet = client.open(os.getenv('SPREADSHEET'))
+
     return spreadsheet.worksheet(sheet_name)
 
 def read_data(sheet_name):
