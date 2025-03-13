@@ -12,7 +12,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 #from wordcloud import WordCloud
 
-""" 
+ 
 # Access the DataFrame from session state
 if "df" in st.session_state:
     df = st.session_state["df"]
@@ -31,13 +31,13 @@ songs = df[['nombre_hash', 'song']].copy() #create a copy to avoid slice issues
 songs.set_index('nombre_hash', inplace=True)
 
 # Create new columns to store the Spotify data
-songs['Song Name'] = None
-songs['Release Date'] = None
-songs['Popularity'] = None
-songs['Genres'] = None
-songs['Artist ID'] = None
- """
-""" try:
+songs['song_found'] = None
+songs['song_release'] = None
+songs['popularity'] = None
+songs['genres'] = None
+songs['artist_id'] = None
+ 
+try:
     for nombre_hash, song in songs['song'].items(): #iterate through the series index and value
         result_song = sp.search(q=song, type='track', limit=1)
         if result_song['tracks']['items']:
@@ -52,28 +52,28 @@ songs['Artist ID'] = None
                 
                 genres = artist_result['genres'] if artist_result else []
 
-                songs.loc[nombre_hash, 'Song Name'] = track['name']
-                songs.loc[nombre_hash, 'Release Date'] = release_date
-                songs.loc[nombre_hash, 'Popularity'] = popularity
-                songs.loc[nombre_hash, 'Genres'] = ", ".join(genres)
-                songs.loc[nombre_hash, 'Artist ID'] = artist_name   
+                songs.loc[nombre_hash, 'song_found'] = track['name']
+                songs.loc[nombre_hash, 'song_release'] = release_date
+                songs.loc[nombre_hash, 'popularity'] = popularity
+                songs.loc[nombre_hash, 'genres'] = ", ".join(genres)
+                songs.loc[nombre_hash, 'artist_id'] = artist_name   
                 
         else:
                 print(f"Track '{song}' not found.")
-                songs.loc[nombre_hash, 'Song Name'] = "Not found"
+                songs.loc[nombre_hash, 'song_found'] = "Not found"
 except Exception as e:
         print(f"Error processing song '{song}': {e}")
 finally:
     print("songs:",songs)
-    write_data(songs.reset_index().values.tolist(), "ebis_ds_25_spotify") """
+    write_data(songs.reset_index().values.tolist(), "ebis_ds_25_spotify") 
 
 st.markdown('## What\'s your jam?')
 
 st.write("### 🎵 Songs")
 st.write("Estas son las canciones que hemos compartido")
 
-songs = read_data("ebis_ds_25_spotify")
-st.dataframe(songs)
+#songs = read_data("ebis_ds_25_spotify")
+#st.dataframe(songs)
 
 # Calculate the mean popularity
 mean_popularity = songs['popularity'].mean()
@@ -87,7 +87,7 @@ else:
     text = 'Somos un poco alternativos'
 
 
-# Count how many release dates are before 2018
+# Count how many song_releases are before 2018
 release_dates_before_2018 = songs[songs['song_release'] < '2010-01-01'].shape[0]
 #st.write(f"Number of songs released before 2018: {release_dates_before_2018}")
 total = songs.shape[0]
