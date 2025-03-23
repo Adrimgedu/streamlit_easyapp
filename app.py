@@ -3,8 +3,8 @@ import pandas as pd
 import os
 import plotly.express as px
 import pycountry  
-from fun import * # Ensure these functions handle Google Sheets
-import cons as c  # Ensure this contains country list, area list, etc.
+from fun import * 
+import cons as c  
 from st_social_media_links import SocialMediaIcons
 
 st.logo("img/logo_adri.png")
