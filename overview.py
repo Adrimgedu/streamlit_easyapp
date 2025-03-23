@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import pycountry  
-from fun import write_data, read_data, get_country_code  # Ensure these functions handle Google Sheets
-import cons as c  # Ensure this contains country list, area list, etc.
+from fun import write_data, read_data, get_country_code  
+import cons as c   
 import altair as alt
 import numpy as np
 import os
