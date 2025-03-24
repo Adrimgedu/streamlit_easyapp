@@ -72,8 +72,8 @@ st.markdown('## What\'s your jam?')
 st.write("### 🎵 Songs")
 st.write("Estas son las canciones que hemos compartido")
 
-#songs = read_data("ebis_ds_25_spotify")
-#st.dataframe(songs)
+songs = read_data("ebis_ds_25_spotify")
+st.dataframe(songs)
 
 # Calculate the mean popularity
 mean_popularity = songs['popularity'].mean()
