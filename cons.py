@@ -79,6 +79,9 @@ carreras = {
         "Bioquímica",
         "Biotecnología",
         "Óptica y Optometría"
+    ],
+    "Otras": [
+        "Otras"
     ]
 }
 

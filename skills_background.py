@@ -20,7 +20,7 @@ skills = df[['skill_prog', 'skill_sql', 'skill_vis', 'skill_comp', 'skill_mat']]
 # Plot the mean skill proficiency with labels inside the bars
 fig2 = px.bar(y=skills.index,
               x=skills.values, labels={'x': 'Skills', 'y': 'Proficiency'},
-              title='Median Skill Proficiency',
+              title='Mediana de Skills',
               orientation='h',
               text=skills.values)
 fig2.update_xaxes(range=[0, 10])
@@ -28,27 +28,27 @@ fig2.update_traces(texttemplate='%{text:.2f}', textposition='inside')
 
 #heatmap correlation of skills 
 corr = df[['skill_prog', 'skill_sql', 'skill_vis', 'skill_comp', 'skill_mat']].corr()
-fig3 = px.imshow(corr, text_auto=True, aspect="auto", title='Correlation Heatmap of Skills',
+fig3 = px.imshow(corr, text_auto=True, aspect="auto", title='Mapa de correlaciones Skills',
                  color_continuous_scale=px.colors.sequential.Burg)
 
 
 # Pie chart for 'motivation'
 motivation_counts = df['motivation'].value_counts()
 fig4 = px.pie(values=motivation_counts.values, names=motivation_counts.index,
-                title='Motivation Distribution', hole=0.3)
+                title='Motivación', hole=0.3)
 fig4.update_traces(textinfo='percent+label')
 
 # Pie chart for 'ocupacion'
 ocupacion_counts = df['ocupacion'].value_counts()
 fig5 = px.pie(values=ocupacion_counts.values, names=ocupacion_counts.index,
-                title='Occupation Distribution', hole=0.3)
+                title='Ocupación actual', hole=0.3)
 fig5.update_traces(textinfo='percent+label')
 
 
 # Bar chart for 'bachelour' counts
 bachelour_counts = df['bachelor'].value_counts()
 fig6 = px.bar(y=bachelour_counts.index, x=bachelour_counts.values,
-              title='bachelor Count', orientation='h')
+              title='Formación', orientation='h')
 fig6.update_traces(texttemplate='%{y} / %{x}', textposition='inside')
 fig6.update_yaxes(visible=False)
 

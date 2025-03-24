@@ -17,7 +17,7 @@ if "df" not in st.session_state:
 else:
     df = st.session_state["df"]
 
-st.markdown('#### Quick Stats')
+st.markdown('#### Estadísticas rápidas')
 row1 = st.columns(3)    
 
 with row1[0]:

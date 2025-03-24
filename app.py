@@ -77,10 +77,10 @@ if not st.session_state["submitted"]:
 
         # Multi-level Dictionary Select (Bachelor)
         all_suboptions = sorted([sub for subs in c.carreras.values() for sub in subs])  
-        bachelor = st.selectbox("Carrera Universitaria",index=None,options=all_suboptions,placeholder="Selecciona una carrera")  
+        bachelor = st.selectbox("Carrera Universitaria",index=None,options=all_suboptions,placeholder="Selecciona una carrera o formación que más se apróxime")  
 
         # Occupation
-        ocupacion = st.selectbox("Ocupación", ['Trabajo', 'Estudiando', 'Ambas'],index=None,placeholder="En qué estás ocupado actualmente")
+        ocupacion = st.selectbox("Ocupación", ['Trabajo', 'Estudiando', 'Ambas'],index=None,placeholder="En qué estás ocupado actualmente (Sin contar este Máster)")
 
         # Area & Country
         area = st.selectbox("Área de interés", c.areas,index=None,placeholder="Selecciona el campo de donde vienes")

@@ -22,9 +22,9 @@ print("🚀 Iniciando la aplicación...")
 
 
 pages = {
-    "overview": [st.Page("overview.py", title="Overview")],
+    "overview": [st.Page("overview.py", title="Vista rápida")],
     "skills_background": [st.Page("skills_background.py", title="Skills & Background")],
-    "music": [st.Page("music.py", title="What's your jam?")]
+    "music": [st.Page("music.py", title="Cuál es el rollo?")]
 }
 
 # Set the default page to "overview"
